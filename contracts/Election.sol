@@ -13,8 +13,15 @@ contract Election {
 	}
 	
 
+	mapping (address => bool) public voters;
+	
+
+
+
+
 	mapping (uint => Candidate) public candidates;
 	
+
 	uint public candidatesCount;
 
 
@@ -30,6 +37,24 @@ contract Election {
 		
 	}
 	
+
+	function vote(uint _candidateId) public {
+
+
+		
+		require (!voters[msg.sender]);
+
+		require (_candidateId > 0 && _candidateId <= candidatesCount);
+		
+// 		so we can log who has voted
+		voters[msg.sender]= true;
+
+
+
+
+		candidates[_candidateId].voteCount ++ ;
+	}
+
 
 
 }
